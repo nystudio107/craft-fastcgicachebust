@@ -90,7 +90,7 @@ class FastcgiCacheBust extends Plugin
     protected function settingsHtml(): string
     {
         return Craft::$app->view->renderTemplate(
-            'fastcgicachebust/settings',
+            'fastcgi-cache-bust/settings',
             [
                 'settings' => $this->getSettings()
             ]

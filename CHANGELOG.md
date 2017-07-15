@@ -1,6 +1,8 @@
 # FastCGI Cache Bust Changelog
 
-All notable changes to this project will be documented in this file.
+## 1.0.1 - 2017.07.15
+### Changed
+* Craft 3 beta 20 compatibility
 
 ## 1.0.0 - 2017.06.16
 ### Added
