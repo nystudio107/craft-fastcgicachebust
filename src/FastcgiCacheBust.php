@@ -65,7 +65,7 @@ class FastcgiCacheBust extends Plugin
 
         Craft::info(
             Craft::t(
-                'fastcgicachebust',
+                'fastcgi-cache-bust',
                 '{name} plugin loaded',
                 ['name' => $this->name]
             ),

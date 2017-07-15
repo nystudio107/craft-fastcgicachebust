@@ -41,7 +41,7 @@ class Cache extends Component
                 FileHelper::clearDirectory($settings->cachePath);
                 Craft::info(
                     Craft::t(
-                        'fastcgicachebust',
+                        'fastcgi-cache-bust',
                         'FastCGI Cache busted: `' . $settings->cachePath
                     ),
                     __METHOD__
