@@ -15,4 +15,5 @@
  */
 return [
     'FastCGI Cache Bust plugin loaded' => 'FastCGI Cache Bust plugin loaded',
+    'FastCGI Cache' => 'FastCGI Cache'
 ];

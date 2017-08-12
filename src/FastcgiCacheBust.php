@@ -16,7 +16,9 @@ use nystudio107\fastcgicachebust\models\Settings;
 use Craft;
 use craft\base\Plugin;
 use craft\events\ElementEvent;
+use craft\events\RegisterCacheOptionsEvent;
 use craft\services\Elements;
+use craft\utilities\ClearCaches;
 
 use yii\base\Event;
 
@@ -60,6 +62,21 @@ class FastcgiCacheBust extends Plugin
                     __METHOD__
                 );
                 FastcgiCacheBust::$plugin->cache->clearAll();
+            }
+        );
+
+        // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
+        Event::on(
+            ClearCaches::className(),
+            ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
+            function (RegisterCacheOptionsEvent $event) {
+                $event->options[] = [
+                    'key' => 'fastcgi-cache-bust',
+                    'label' => Craft::t('fastcgi-cache-bust', 'FastCGI Cache'),
+                    'action' => function () {
+                        FastcgiCacheBust::$plugin->cache->clearAll();
+                    },
+                ];
             }
         );
 
