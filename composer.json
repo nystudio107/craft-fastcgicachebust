@@ -2,7 +2,7 @@
     "name": "nystudio107/craft3-fastcgicachebust",
     "description": "Bust the Nginx FastCGI Cache when entries are saved or created.",
     "type": "craft-plugin",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "keywords": [
         "craft",
         "cms",

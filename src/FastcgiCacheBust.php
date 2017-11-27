@@ -14,7 +14,9 @@ use nystudio107\fastcgicachebust\services\Cache as CacheService;
 use nystudio107\fastcgicachebust\models\Settings;
 
 use Craft;
+use craft\base\Element;
 use craft\base\Plugin;
+use craft\elements\Entry;
 use craft\events\ElementEvent;
 use craft\events\RegisterCacheOptionsEvent;
 use craft\services\Elements;
@@ -61,7 +63,31 @@ class FastcgiCacheBust extends Plugin
                     'Elements::EVENT_AFTER_SAVE_ELEMENT',
                     __METHOD__
                 );
-                FastcgiCacheBust::$plugin->cache->clearAll();
+                /** @var Element $element */
+                $element = $event->element;
+                $isNewElement = $event->isNew;
+                $bustCache = true;
+                // Only bust the cache if the element is ENABLED or LIVE
+                if (($element->getStatus() != Element::STATUS_ENABLED)
+                    && ($element->getStatus() != Entry::STATUS_LIVE)
+                ) {
+                    $bustCache = false;
+                }
+                // Only bust the cache if it's not certain excluded element types
+                /* @TODO: These need to be updated once the plugins are released for Craft 3
+                if (($element instanceof 'SproutSeo_Redirect')
+                    || ($element instanceof 'PushNotifications_Device')
+                ) {
+                    $bustCache = false;
+                }
+                */
+                if ($bustCache) {
+                    Craft::trace(
+                        "Cache busted due to saving: " . $element::className() . " - " . $element->title,
+                        __METHOD__
+                    );
+                    FastcgiCacheBust::$plugin->cache->clearAll();
+                }
             }
         );
 
