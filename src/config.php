@@ -25,6 +25,7 @@
 return [
 
     // Enter the full absolute path to the FastCGI Cache directory.
+    // If you require more than one FastCGI Cache directory cleared, separate the paths with a comma (,).
     "cachePath" => '',
 
 ];

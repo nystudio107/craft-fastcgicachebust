@@ -38,14 +38,18 @@ class Cache extends Component
         $settings = FastcgiCacheBust::$plugin->getSettings();
         if (!empty($settings)) {
             if (!empty($settings->cachePath)) {
-                FileHelper::clearDirectory($settings->cachePath);
-                Craft::info(
-                    Craft::t(
-                        'fastcgi-cache-bust',
-                        'FastCGI Cache busted: `' . $settings->cachePath
-                    ),
-                    __METHOD__
-                );
+                $cacheDirs = explode(',', $settings->cachePath);
+                foreach ($cacheDirs as $cacheDir) {
+                    $cacheDir = trim($cacheDir);
+                    FileHelper::clearDirectory($cacheDir);
+                    Craft::info(
+                        Craft::t(
+                            'fastcgi-cache-bust',
+                            'FastCGI Cache busted: `'.$cacheDir
+                        ),
+                        __METHOD__
+                    );
+                }
             }
         }
     }
