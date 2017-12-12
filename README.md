@@ -2,6 +2,8 @@
 
 Bust the Nginx FastCGI Cache when entries are saved or created.
 
+![Screenshot](resources/img/plugin-logo.png)
+
 Related: [FastCGI Cache Bust for Craft 2.x](https://github.com/nystudio107/fastcgicachebust)
 
 ## Requirements
