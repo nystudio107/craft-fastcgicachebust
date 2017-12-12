@@ -2,7 +2,13 @@
 
 Bust the Nginx FastCGI Cache when entries are saved or created.
 
+![Screenshot](resources/img/plugin-logo.png)
+
 Related: [FastCGI Cache Bust for Craft 2.x](https://github.com/nystudio107/fastcgicachebust)
+
+## Requirements
+
+This plugin requires Craft CMS 3.0.0-RC1 or later.
 
 ## Installation
 
@@ -21,7 +27,7 @@ Check out the article [Static Page Caching with Craft CMS](https://nystudio107.c
 
 ## Configuring FastCGI Cache Bust
 
-Click on the gear icon next to the plugin to configure it by adding the full absolute path to your Nginx FastCGI Cache directory.
+Click on the gear icon next to the plugin to configure it by adding the full absolute path to your Nginx FastCGI Cache directory. If you require more than one FastCGI Cache directory cleared, separate the paths with a comma (`,`).
 
 ## Using FastCGI Cache Bust
 
