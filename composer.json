@@ -1,8 +1,8 @@
 {
-    "name": "nystudio107/craft3-fastcgicachebust",
+    "name": "nystudio107/craft-fastcgicachebust",
     "description": "Bust the Nginx FastCGI Cache when entries are saved or created.",
     "type": "craft-plugin",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "keywords": [
         "craft",
         "cms",
@@ -11,8 +11,8 @@
         "fastcgi cache bust"
     ],
     "support": {
-        "docs": "https://github.com/nystudio107/craft3-fastcgicachebust/blob/master/README.md",
-        "issues": "https://github.com/nystudio107/craft3-fastcgicachebust/issues"
+        "docs": "https://github.com/nystudio107/craft-fastcgicachebust/blob/master/README.md",
+        "issues": "https://github.com/nystudio107/craft-fastcgicachebust/issues"
     },
     "license": "MIT",
     "authors": [
@@ -41,7 +41,7 @@
         "schemaVersion": "1.0.0",
         "hasCpSettings": true,
         "hasCpSection": false,
-        "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft3-fastcgicachebust/master/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-fastcgicachebust/master/CHANGELOG.md",
         "components": {
             "cache": "nystudio107\\fastcgicachebust\\services\\Cache"
         },

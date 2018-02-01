@@ -1,5 +1,9 @@
 # FastCGI Cache Bust Changelog
 
+## 1.0.5 - 2018.02.01
+### Added
+* Renamed the composer package name to `craft-fastcgicachebust`
+
 ## 1.0.4 - 2017.12.06
 ### Added
 * You can have more than one cache to have it clear by separating the paths with a comma (`,`) in the config settings
