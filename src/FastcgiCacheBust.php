@@ -59,7 +59,7 @@ class FastcgiCacheBust extends Plugin
             Elements::class,
             Elements::EVENT_AFTER_SAVE_ELEMENT,
             function (ElementEvent $event) {
-                Craft::trace(
+                Craft::debug(
                     'Elements::EVENT_AFTER_SAVE_ELEMENT',
                     __METHOD__
                 );
@@ -82,8 +82,8 @@ class FastcgiCacheBust extends Plugin
                 }
                 */
                 if ($bustCache) {
-                    Craft::trace(
-                        "Cache busted due to saving: " . $element::className() . " - " . $element->title,
+                    Craft::debug(
+                        "Cache busted due to saving: " . get_class($element) . " - " . $element->title,
                         __METHOD__
                     );
                     FastcgiCacheBust::$plugin->cache->clearAll();
@@ -93,7 +93,7 @@ class FastcgiCacheBust extends Plugin
 
         // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
         Event::on(
-            ClearCaches::className(),
+            ClearCaches::class,
             ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
             function (RegisterCacheOptionsEvent $event) {
                 $event->options[] = [

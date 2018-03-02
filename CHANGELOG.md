@@ -1,5 +1,9 @@
 # FastCGI Cache Bust Changelog
 
+## 1.0.6 - 2018.03.02
+### Changed
+* Fixed deprecation errors from Craft CMS 3 RC13
+
 ## 1.0.5 - 2018.02.01
 ### Added
 * Renamed the composer package name to `craft-fastcgicachebust`
