@@ -1,5 +1,10 @@
 # FastCGI Cache Bust Changelog
 
+## 1.0.7 - 2018.03.20
+### Changed
+* Added a config file override warning to the Settings page
+* Fixed inconsistent quotes in the `config.php`
+
 ## 1.0.6 - 2018.03.02
 ### Changed
 * Fixed deprecation errors from Craft CMS 3 RC13
