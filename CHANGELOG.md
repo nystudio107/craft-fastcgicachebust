@@ -1,5 +1,12 @@
 # FastCGI Cache Bust Changelog
 
+## 1.0.8 - 2018.04.14
+### Added
+* The FastCGI Cache will now also be cleared whenever Template caches are deleted
+
+### Changed
+* Refactored out to `shouldBustCache` method
+
 ## 1.0.7 - 2018.03.20
 ### Changed
 * Added a config file override warning to the Settings page
