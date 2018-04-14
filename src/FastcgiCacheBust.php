@@ -67,7 +67,7 @@ class FastcgiCacheBust extends Plugin
                 /** @var Element $element */
                 $element = $event->element;
                 // Only bust the cache if it's not certain excluded element types
-                if ($this->shoudBustCache($element)) {
+                if ($this->shouldBustCache($element)) {
                     Craft::debug(
                         'Cache busted due to saving: '.\get_class($element).' - '.$element->title,
                         __METHOD__
@@ -110,7 +110,7 @@ class FastcgiCacheBust extends Plugin
      *
      * @return bool
      */
-    protected function shoudBustCache(Element $element): bool
+    protected function shouldBustCache(Element $element): bool
     {
         $bustCache = true;
         // Only bust the cache if the element is ENABLED or LIVE
