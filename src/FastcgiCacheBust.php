@@ -19,7 +19,9 @@ use craft\base\Plugin;
 use craft\elements\Entry;
 use craft\events\ElementEvent;
 use craft\events\RegisterCacheOptionsEvent;
+use craft\events\DeleteTemplateCachesEvent;
 use craft\services\Elements;
+use craft\services\TemplateCaches;
 use craft\utilities\ClearCaches;
 
 use yii\base\Event;
@@ -76,7 +78,14 @@ class FastcgiCacheBust extends Plugin
                 }
             }
         );
-
+        // Handler: TemplateCaches::EVENT_AFTER_DELETE_CACHES
+        Event::on(
+            TemplateCaches::class,
+            TemplateCaches::EVENT_AFTER_DELETE_CACHES,
+            function (DeleteTemplateCachesEvent $event) {
+                FastcgiCacheBust::$plugin->cache->clearAll();
+            }
+        );
         // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
         Event::on(
             ClearCaches::class,
@@ -106,6 +115,8 @@ class FastcgiCacheBust extends Plugin
     // =========================================================================
 
     /**
+     * Determine whether the cache should be busted or not based on the $element
+     *
      * @param $element
      *
      * @return bool
