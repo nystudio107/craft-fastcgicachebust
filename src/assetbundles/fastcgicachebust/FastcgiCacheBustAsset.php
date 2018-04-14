@@ -10,7 +10,6 @@
 
 namespace nystudio107\fastcgicachebust\assetbundles\FastcgiCacheBust;
 
-use Craft;
 use craft\web\AssetBundle;
 use craft\web\assets\cp\CpAsset;
 
@@ -29,7 +28,7 @@ class FastcgiCacheBustAsset extends AssetBundle
      */
     public function init()
     {
-        $this->sourcePath = "@nystudio107/fastcgicachebust/assetbundles/fastcgicachebust/dist";
+        $this->sourcePath = '@nystudio107/fastcgicachebust/assetbundles/fastcgicachebust/dist';
 
         $this->depends = [
             CpAsset::class,

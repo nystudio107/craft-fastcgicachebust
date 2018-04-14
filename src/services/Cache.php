@@ -16,6 +16,7 @@ use nystudio107\fastcgicachebust\models\Settings;
 use Craft;
 use craft\base\Component;
 use craft\helpers\FileHelper;
+use yii\base\ErrorException;
 
 /**
  * @author    nystudio107
@@ -36,20 +37,22 @@ class Cache extends Component
          * @var Settings settings
          */
         $settings = FastcgiCacheBust::$plugin->getSettings();
-        if (!empty($settings)) {
-            if (!empty($settings->cachePath)) {
-                $cacheDirs = explode(',', $settings->cachePath);
-                foreach ($cacheDirs as $cacheDir) {
-                    $cacheDir = trim($cacheDir);
+        if (!empty($settings) && !empty($settings->cachePath)) {
+            $cacheDirs = explode(',', $settings->cachePath);
+            foreach ($cacheDirs as $cacheDir) {
+                $cacheDir = trim($cacheDir);
+                try {
                     FileHelper::clearDirectory($cacheDir);
-                    Craft::info(
-                        Craft::t(
-                            'fastcgi-cache-bust',
-                            'FastCGI Cache busted: `'.$cacheDir
-                        ),
-                        __METHOD__
-                    );
+                } catch (ErrorException $e) {
+                    Craft::error($e->getMessage(), __METHOD__);
                 }
+                Craft::info(
+                    Craft::t(
+                        'fastcgi-cache-bust',
+                        'FastCGI Cache busted: `'.$cacheDir
+                    ),
+                    __METHOD__
+                );
             }
         }
     }

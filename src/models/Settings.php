@@ -10,9 +10,6 @@
 
 namespace nystudio107\fastcgicachebust\models;
 
-use nystudio107\fastcgicachebust\FastcgiCacheBust;
-
-use Craft;
 use craft\base\Model;
 
 /**
@@ -36,7 +33,7 @@ class Settings extends Model
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             ['cachePath', 'string'],
