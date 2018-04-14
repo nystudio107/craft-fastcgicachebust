@@ -23,6 +23,7 @@ use craft\services\Elements;
 use craft\utilities\ClearCaches;
 
 use yii\base\Event;
+use yii\base\Exception;
 
 /**
  * Class FastcgiCacheBust
@@ -65,25 +66,10 @@ class FastcgiCacheBust extends Plugin
                 );
                 /** @var Element $element */
                 $element = $event->element;
-                $isNewElement = $event->isNew;
-                $bustCache = true;
-                // Only bust the cache if the element is ENABLED or LIVE
-                if (($element->getStatus() != Element::STATUS_ENABLED)
-                    && ($element->getStatus() != Entry::STATUS_LIVE)
-                ) {
-                    $bustCache = false;
-                }
                 // Only bust the cache if it's not certain excluded element types
-                /* @TODO: These need to be updated once the plugins are released for Craft 3
-                if (($element instanceof 'SproutSeo_Redirect')
-                    || ($element instanceof 'PushNotifications_Device')
-                ) {
-                    $bustCache = false;
-                }
-                */
-                if ($bustCache) {
+                if ($this->shoudBustCache($element)) {
                     Craft::debug(
-                        "Cache busted due to saving: " . get_class($element) . " - " . $element->title,
+                        'Cache busted due to saving: '.\get_class($element).' - '.$element->title,
                         __METHOD__
                     );
                     FastcgiCacheBust::$plugin->cache->clearAll();
@@ -97,8 +83,8 @@ class FastcgiCacheBust extends Plugin
             ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
             function (RegisterCacheOptionsEvent $event) {
                 $event->options[] = [
-                    'key' => 'fastcgi-cache-bust',
-                    'label' => Craft::t('fastcgi-cache-bust', 'FastCGI Cache'),
+                    'key'    => 'fastcgi-cache-bust',
+                    'label'  => Craft::t('fastcgi-cache-bust', 'FastCGI Cache'),
                     'action' => function () {
                         FastcgiCacheBust::$plugin->cache->clearAll();
                     },
@@ -120,6 +106,32 @@ class FastcgiCacheBust extends Plugin
     // =========================================================================
 
     /**
+     * @param $element
+     *
+     * @return bool
+     */
+    protected function shoudBustCache(Element $element): bool
+    {
+        $bustCache = true;
+        // Only bust the cache if the element is ENABLED or LIVE
+        if (($element->getStatus() !== Element::STATUS_ENABLED)
+            && ($element->getStatus() !== Entry::STATUS_LIVE)
+        ) {
+            $bustCache = false;
+        }
+
+        /* @TODO: These need to be updated once the plugins are released for Craft 3
+         * if (($element instanceof 'SproutSeo_Redirect')
+         * || ($element instanceof 'PushNotifications_Device')
+         * ) {
+         * $bustCache = false;
+         * }
+         */
+
+        return $bustCache;
+    }
+
+    /**
      * @inheritdoc
      */
     protected function createSettingsModel()
@@ -132,11 +144,19 @@ class FastcgiCacheBust extends Plugin
      */
     protected function settingsHtml(): string
     {
-        return Craft::$app->view->renderTemplate(
-            'fastcgi-cache-bust/settings',
-            [
-                'settings' => $this->getSettings()
-            ]
-        );
+        try {
+            return Craft::$app->view->renderTemplate(
+                'fastcgi-cache-bust/settings',
+                [
+                    'settings' => $this->getSettings(),
+                ]
+            );
+        } catch (\Twig_Error_Loader $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+            return '';
+        } catch (Exception $e) {
+            Craft::error($e->getMessage(), __METHOD__);
+            return '';
+        }
     }
 }
