@@ -14,6 +14,6 @@
  * @since     1.0.0
  */
 return [
-    'FastCGI Cache Bust plugin loaded' => 'FastCGI Cache Bust plugin loaded',
-    'FastCGI Cache' => 'FastCGI Cache'
+    'FastCGI Cache'                    => 'FastCGI Cache',
+    '{name} plugin loaded'             => '{name} plugin loaded'
 ];
