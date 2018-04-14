@@ -6,6 +6,7 @@
 
 ### Changed
 * Refactored out to `shouldBustCache` method
+* Code cleanup
 
 ## 1.0.7 - 2018.03.20
 ### Changed
