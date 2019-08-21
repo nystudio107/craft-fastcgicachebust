@@ -17,7 +17,7 @@ This plugin requires Craft CMS 3.0.0 or later.
 To install FastCGI Cache Bust, follow these steps:
 
 1. Install with Composer via `composer require nystudio107/craft-fastcgicachebust` from your project directory
-2. Install the plugin via `./craft install/plugin fastcgi-cache-bust` via the CLI, or in the Control Panel, go to Settings → Plugins and click the “Install” button for Connect.
+2. Install the plugin via `./craft install/plugin fastcgi-cache-bust` via the CLI, or in the Control Panel, go to Settings → Plugins and click the “Install” button for FastCGI Cache Bust.
 
 You can also install FastCGI Cache Bust via the **Plugin Store** in the Craft Control Panel.
 
