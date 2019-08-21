@@ -4,7 +4,7 @@
 
 Bust the Nginx FastCGI Cache when entries are saved or created.
 
-![Screenshot](docs/resources/img/plugin-logo.png)
+![Screenshot](./resources/img/plugin-logo.png)
 
 Related: [FastCGI Cache Bust for Craft 2.x](https://github.com/nystudio107/fastcgicachebust)
 
@@ -23,8 +23,28 @@ You can also install FastCGI Cache Bust via the **Plugin Store** in the Craft Co
 
 FastCGI Cache Bust works on Craft 3.x.
 
-## Documentation
+## FastCGI Cache Bust Overview
 
-Click here -> [FastCGI Cache Bust Documentation](https://nystudio107.com/plugins/fastcgi-cache-bust/documentation)
+FastCGI Cache Bust is a simple plugin that clears your entire FastCGI Cache any time an entry is saved. This is somewhat of a scortched earth approach to cache invalidation, but it ensure cache coherency.
+
+Check out the article [Static Page Caching with Craft CMS](https://nystudio107.com/blog/static-caching-with-craft-cms) for details on how to set up FastCGI Cache on your website.
+
+## Configuring FastCGI Cache Bust
+
+Click on the gear icon next to the plugin to configure it by adding the full absolute path to your Nginx FastCGI Cache directory. If you require more than one FastCGI Cache directory cleared, separate the paths with a comma (`,`).
+
+## Using FastCGI Cache Bust
+
+FastCGI Cache Bust listens for elements being saved, and busts the entire FastCGI Cache automatically when that happens.
+
+FastCGI Cache Bust will also bust the entire FastCGI Cache whenever Template caches are deleted.
+
+You can also manually clear the FastCGI Cache via Craft's 'Clear Caches' tool
+
+## FastCGI Cache Bust Roadmap
+
+Some things to do, and ideas for potential features:
+
+* We could invalidate only affected caches onElementSave instead of the entire cache
 
 Brought to you by [nystudio107](https://nystudio107.com)
