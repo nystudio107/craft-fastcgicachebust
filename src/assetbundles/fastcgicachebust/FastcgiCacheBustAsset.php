@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017 nystudio107
  */
 
-namespace nystudio107\fastcgicachebust\assetbundles\FastcgiCacheBust;
+namespace nystudio107\fastcgicachebust\assetbundles\fastcgicachebust;
 
 use craft\web\AssetBundle;
 use craft\web\assets\cp\CpAsset;
