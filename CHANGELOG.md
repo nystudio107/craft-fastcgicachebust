@@ -1,5 +1,9 @@
 # FastCGI Cache Bust Changelog
 
+## 1.0.9 - 2020.04.16
+### Added
+* Fixed Asset Bundle namespace case
+
 ## 1.0.8 - 2018.04.14
 ### Added
 * The FastCGI Cache will now also be cleared whenever Template caches are deleted
