@@ -26,7 +26,7 @@ class FastcgiCacheBustAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         $this->sourcePath = '@nystudio107/fastcgicachebust/assetbundles/fastcgicachebust/dist';
 

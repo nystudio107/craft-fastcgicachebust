@@ -30,11 +30,8 @@ class Cache extends Component
     /**
      * Clears the entirety of the FastCGI Cache
      */
-    public function clearAll()
+    public function clearAll(): void
     {
-        /**
-         * @var Settings settings
-         */
         $settings = FastcgiCacheBust::$plugin->getSettings();
         if (!empty($settings) && !empty($settings->cachePath)) {
             $cacheDirs = explode(',', $settings->cachePath);
@@ -43,9 +40,10 @@ class Cache extends Component
                 $cacheDir = trim($cacheDir);
                 try {
                     FileHelper::clearDirectory($cacheDir);
-                } catch (ErrorException $e) {
-                    Craft::error($e->getMessage(), __METHOD__);
+                } catch (ErrorException $errorException) {
+                    Craft::error($errorException->getMessage(), __METHOD__);
                 }
+
                 Craft::info(
                     Craft::t(
                         'fastcgi-cache-bust',
