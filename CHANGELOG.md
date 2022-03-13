@@ -1,5 +1,16 @@
 # FastCGI Cache Bust Changelog
 
+## 1.0.10 - 2022.03.12
+
+### Added
+* Added the ability to use environment variables and aliases in the **FastCGI Cache Path** setting ([#9](https://github.com/nystudio107/craft-fastcgicachebust/issues/9))
+* Added `.gitattributes` & `CODEOWNERS`
+
+### Changed
+
+* Refactored from `composer.json` `extra` to `__construct()` and object properties
+* Switched documentation system to VitePress
+
 ## 1.0.9 - 2020.04.16
 ### Added
 * Fixed Asset Bundle namespace case

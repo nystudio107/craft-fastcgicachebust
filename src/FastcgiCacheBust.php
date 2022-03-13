@@ -10,22 +10,21 @@
 
 namespace nystudio107\fastcgicachebust;
 
-use nystudio107\fastcgicachebust\services\Cache as CacheService;
-use nystudio107\fastcgicachebust\models\Settings;
-
 use Craft;
 use craft\base\Element;
 use craft\base\Plugin;
 use craft\elements\Entry;
+use craft\events\DeleteTemplateCachesEvent;
 use craft\events\ElementEvent;
 use craft\events\RegisterCacheOptionsEvent;
-use craft\events\DeleteTemplateCachesEvent;
 use craft\services\Elements;
 use craft\services\TemplateCaches;
 use craft\utilities\ClearCaches;
-
+use nystudio107\fastcgicachebust\models\Settings;
+use nystudio107\fastcgicachebust\services\Cache as CacheService;
 use yii\base\Event;
 use yii\base\Exception;
+use function get_class;
 
 /**
  * Class FastcgiCacheBust
@@ -46,8 +45,38 @@ class FastcgiCacheBust extends Plugin
      */
     public static $plugin;
 
+    // Public Properties
+    // =========================================================================
+
+    /**
+     * @var string
+     */
+    public $schemaVersion = '1.0.0';
+
+    /**
+     * @var bool
+     */
+    public $hasCpSection = false;
+
+    /**
+     * @var bool
+     */
+    public $hasCpSettings = true;
+
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function __construct($id, $parent = null, array $config = [])
+    {
+        $config['components'] = [
+            'cache' => CacheService::class,
+        ];
+
+        parent::__construct($id, $parent, $config);
+    }
 
     /**
      * @inheritdoc
@@ -71,7 +100,7 @@ class FastcgiCacheBust extends Plugin
                 // Only bust the cache if it's not certain excluded element types
                 if ($this->shouldBustCache($element)) {
                     Craft::debug(
-                        'Cache busted due to saving: '.\get_class($element).' - '.$element->title,
+                        'Cache busted due to saving: ' . get_class($element) . ' - ' . $element->title,
                         __METHOD__
                     );
                     FastcgiCacheBust::$plugin->cache->clearAll();
@@ -82,7 +111,7 @@ class FastcgiCacheBust extends Plugin
         Event::on(
             TemplateCaches::class,
             TemplateCaches::EVENT_AFTER_DELETE_CACHES,
-            function (DeleteTemplateCachesEvent $event) {
+            static function (DeleteTemplateCachesEvent $event) {
                 FastcgiCacheBust::$plugin->cache->clearAll();
             }
         );
@@ -90,10 +119,10 @@ class FastcgiCacheBust extends Plugin
         Event::on(
             ClearCaches::class,
             ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
-            function (RegisterCacheOptionsEvent $event) {
+            static function (RegisterCacheOptionsEvent $event) {
                 $event->options[] = [
-                    'key'    => 'fastcgi-cache-bust',
-                    'label'  => Craft::t('fastcgi-cache-bust', 'FastCGI Cache'),
+                    'key' => 'fastcgi-cache-bust',
+                    'label' => Craft::t('fastcgi-cache-bust', 'FastCGI Cache'),
                     'action' => function () {
                         FastcgiCacheBust::$plugin->cache->clearAll();
                     },
@@ -117,7 +146,7 @@ class FastcgiCacheBust extends Plugin
     /**
      * Determine whether the cache should be busted or not based on the $element
      *
-     * @param $element
+     * @param Element $element
      *
      * @return bool
      */
@@ -130,14 +159,6 @@ class FastcgiCacheBust extends Plugin
         ) {
             $bustCache = false;
         }
-
-        /* @TODO: These need to be updated once the plugins are released for Craft 3
-         * if (($element instanceof 'SproutSeo_Redirect')
-         * || ($element instanceof 'PushNotifications_Device')
-         * ) {
-         * $bustCache = false;
-         * }
-         */
 
         return $bustCache;
     }
@@ -162,9 +183,6 @@ class FastcgiCacheBust extends Plugin
                     'settings' => $this->getSettings(),
                 ]
             );
-        } catch (\Twig_Error_Loader $e) {
-            Craft::error($e->getMessage(), __METHOD__);
-            return '';
         } catch (Exception $e) {
             Craft::error($e->getMessage(), __METHOD__);
             return '';
