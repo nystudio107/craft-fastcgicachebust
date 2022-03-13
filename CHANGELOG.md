@@ -1,5 +1,15 @@
 # FastCGI Cache Bust Changelog
 
+## 1.0.10 - 2022.03.12
+
+### Changed
+
+* Refactored from `composer.json` `extra` to `__construct()` and object properties
+* Switched documentation system to VitePress
+
+### Added
+* Added `.gitattributes` & `CODEOWNERS`
+
 ## 1.0.9 - 2020.04.16
 ### Added
 * Fixed Asset Bundle namespace case
