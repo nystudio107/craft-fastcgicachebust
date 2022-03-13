@@ -22,7 +22,6 @@ use craft\services\TemplateCaches;
 use craft\utilities\ClearCaches;
 use nystudio107\fastcgicachebust\models\Settings;
 use nystudio107\fastcgicachebust\services\Cache as CacheService;
-use Twig_Error_Loader;
 use yii\base\Event;
 use yii\base\Exception;
 use function get_class;
@@ -112,7 +111,7 @@ class FastcgiCacheBust extends Plugin
         Event::on(
             TemplateCaches::class,
             TemplateCaches::EVENT_AFTER_DELETE_CACHES,
-            function (DeleteTemplateCachesEvent $event) {
+            static function (DeleteTemplateCachesEvent $event) {
                 FastcgiCacheBust::$plugin->cache->clearAll();
             }
         );
@@ -120,7 +119,7 @@ class FastcgiCacheBust extends Plugin
         Event::on(
             ClearCaches::class,
             ClearCaches::EVENT_REGISTER_CACHE_OPTIONS,
-            function (RegisterCacheOptionsEvent $event) {
+            static function (RegisterCacheOptionsEvent $event) {
                 $event->options[] = [
                     'key' => 'fastcgi-cache-bust',
                     'label' => Craft::t('fastcgi-cache-bust', 'FastCGI Cache'),
@@ -184,9 +183,6 @@ class FastcgiCacheBust extends Plugin
                     'settings' => $this->getSettings(),
                 ]
             );
-        } catch (Twig_Error_Loader $e) {
-            Craft::error($e->getMessage(), __METHOD__);
-            return '';
         } catch (Exception $e) {
             Craft::error($e->getMessage(), __METHOD__);
             return '';
