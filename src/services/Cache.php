@@ -14,7 +14,6 @@ use Craft;
 use craft\base\Component;
 use craft\helpers\FileHelper;
 use nystudio107\fastcgicachebust\FastcgiCacheBust;
-use nystudio107\fastcgicachebust\models\Settings;
 use yii\base\ErrorException;
 
 /**
@@ -33,7 +32,7 @@ class Cache extends Component
     public function clearAll(): void
     {
         $settings = FastcgiCacheBust::$plugin->getSettings();
-        if (!empty($settings) && !empty($settings->cachePath)) {
+        if ($settings !== null && !empty($settings->cachePath)) {
             $cacheDirs = explode(',', $settings->cachePath);
             foreach ($cacheDirs as $cacheDir) {
                 $cacheDir = Craft::parseEnv($cacheDir);

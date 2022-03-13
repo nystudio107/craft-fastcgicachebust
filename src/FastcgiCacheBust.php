@@ -14,17 +14,14 @@ use Craft;
 use craft\base\Element;
 use craft\base\Plugin;
 use craft\elements\Entry;
-use craft\events\DeleteTemplateCachesEvent;
 use craft\events\ElementEvent;
 use craft\events\RegisterCacheOptionsEvent;
 use craft\services\Elements;
-use craft\services\TemplateCaches;
 use craft\utilities\ClearCaches;
 use nystudio107\fastcgicachebust\models\Settings;
 use nystudio107\fastcgicachebust\services\Cache as CacheService;
 use yii\base\Event;
 use yii\base\Exception;
-use function get_class;
 
 /**
  * Class FastcgiCacheBust
@@ -41,9 +38,9 @@ class FastcgiCacheBust extends Plugin
     // =========================================================================
 
     /**
-     * @var FastcgiCacheBust
+     * @var ?FastcgiCacheBust
      */
-    public static $plugin;
+    public static ?FastcgiCacheBust $plugin;
 
     // Public Properties
     // =========================================================================
@@ -107,14 +104,6 @@ class FastcgiCacheBust extends Plugin
                 }
             }
         );
-        // Handler: TemplateCaches::EVENT_AFTER_DELETE_CACHES
-        Event::on(
-            TemplateCaches::class,
-            TemplateCaches::EVENT_AFTER_DELETE_CACHES,
-            static function (DeleteTemplateCachesEvent $event): void {
-                FastcgiCacheBust::$plugin->cache->clearAll();
-            }
-        );
         // Handler: ClearCaches::EVENT_REGISTER_CACHE_OPTIONS
         Event::on(
             ClearCaches::class,
@@ -163,7 +152,7 @@ class FastcgiCacheBust extends Plugin
     /**
      * @inheritdoc
      */
-    protected function createSettingsModel(): \nystudio107\fastcgicachebust\models\Settings
+    protected function createSettingsModel(): Settings
     {
         return new Settings();
     }
