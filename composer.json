@@ -1,50 +1,44 @@
 {
-    "name": "nystudio107/craft-fastcgicachebust",
-    "description": "Bust the Nginx FastCGI Cache when entries are saved or created.",
-    "type": "craft-plugin",
-    "version": "1.0.9",
-    "keywords": [
-        "craft",
-        "cms",
-        "craftcms",
-        "craft-plugin",
-        "fastcgi cache bust"
-    ],
-    "support": {
-        "docs": "https://nystudio107.com/plugins/fastcgi-cache-bust/documentation",
-        "issues": "https://nystudio107.com/plugins/fastcgi-cache-bust/support"
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "nystudio107",
-            "homepage": "https://nystudio107.com"
-        }
-    ],
-    "require": {
-        "craftcms/cms": "^3.0.0-RC1"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-          "nystudio107\\fastcgicachebust\\": "src/"
-        }
-    },
-    "extra": {
-        "name": "FastCGI Cache Bust",
-        "handle": "fastcgi-cache-bust",
-        "schemaVersion": "1.0.0",
-        "hasCpSettings": true,
-        "hasCpSection": false,
-        "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft-fastcgicachebust/v1/CHANGELOG.md",
-        "components": {
-            "cache": "nystudio107\\fastcgicachebust\\services\\Cache"
-        },
-        "class": "nystudio107\\fastcgicachebust\\FastcgiCacheBust"
+  "name": "nystudio107/craft-fastcgicachebust",
+  "description": "Bust the Nginx FastCGI Cache when entries are saved or created.",
+  "type": "craft-plugin",
+  "version": "1.0.10",
+  "keywords": [
+    "craft",
+    "cms",
+    "craftcms",
+    "craft-plugin",
+    "fastcgi cache bust"
+  ],
+  "support": {
+    "docs": "https://nystudio107.com/docs/fastcgi-cache-bust/",
+    "issues": "https://nystudio107.com/plugins/fastcgi-cache-bust/support",
+    "source": "https://github.com/nystudio107/craft-minify"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "nystudio107",
+      "homepage": "https://nystudio107.com"
     }
+  ],
+  "require": {
+    "craftcms/cms": "^3.1.0"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "nystudio107\\fastcgicachebust\\": "src/"
+    }
+  },
+  "extra": {
+    "class": "nystudio107\\fastcgicachebust\\FastcgiCacheBust",
+    "handle": "fastcgi-cache-bust",
+    "name": "FastCGI Cache Bust"
+  }
 }
