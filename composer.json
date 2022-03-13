@@ -25,12 +25,6 @@
   "require": {
     "craftcms/cms": "^3.1.0"
   },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://asset-packagist.org"
-    }
-  ],
   "autoload": {
     "psr-4": {
       "nystudio107\\fastcgicachebust\\": "src/"
