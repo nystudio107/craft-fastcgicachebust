@@ -1,6 +1,6 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nystudio107/craft-fastcgicachebust/badges/quality-score.png?b=v1)](https://scrutinizer-ci.com/g/nystudio107/craft-fastcgicachebust/?branch=v1) [![Code Coverage](https://scrutinizer-ci.com/g/nystudio107/craft-fastcgicachebust/badges/coverage.png?b=v1)](https://scrutinizer-ci.com/g/nystudio107/craft-fastcgicachebust/?branch=v1) [![Build Status](https://scrutinizer-ci.com/g/nystudio107/craft-fastcgicachebust/badges/build.png?b=v1)](https://scrutinizer-ci.com/g/nystudio107/craft-fastcgicachebust/build-status/v1) [![Code Intelligence Status](https://scrutinizer-ci.com/g/nystudio107/craft-fastcgicachebust/badges/code-intelligence.svg?b=v1)](https://scrutinizer-ci.com/code-intelligence)
 
-# FastCGI Cache Bust plugin for Craft CMS 3.x
+# FastCGI Cache Bust plugin for Craft CMS 4.x
 
 Bust the Nginx FastCGI Cache when entries are saved or created.
 
@@ -10,7 +10,7 @@ Related: [FastCGI Cache Bust for Craft 2.x](https://github.com/nystudio107/fastc
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0 or later.
+This plugin requires Craft CMS 4.0.0 or later.
 
 ## Installation
 
@@ -21,7 +21,7 @@ To install FastCGI Cache Bust, follow these steps:
 
 You can also install FastCGI Cache Bust via the **Plugin Store** in the Craft Control Panel.
 
-FastCGI Cache Bust works on Craft 3.x.
+FastCGI Cache Bust works on Craft 4.x.
 
 ## Documentation
 
