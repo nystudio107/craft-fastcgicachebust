@@ -25,7 +25,7 @@ class Settings extends Model
     /**
      * @var string
      */
-    public $cachePath = '';
+    public string $cachePath = '';
 
     // Public Methods
     // =========================================================================
