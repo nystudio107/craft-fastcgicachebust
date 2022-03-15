@@ -14,9 +14,9 @@ module.exports = {
     docsDir: 'docs/docs',
     docsBranch: 'v1',
     algolia: {
-      appId: '',
-      apiKey: '',
-      indexName: ''
+      appId: '3JUO5TO2MP',
+      apiKey: '21bdcc520664f952bfd3f25e5549f384',
+      indexName: 'nystudio107-fastcgi-cache-bust'
     },
     editLinks: true,
     editLinkText: 'Edit this page on GitHub',
