@@ -2,6 +2,7 @@
 
 ## 1.0.11 - 2022.12.24
 ### Changed
+* Don't bust the cache if the element being saved is a draft or revision ([#37](https://github.com/nystudio107/craft-fastcgicachebust/issues/37))
 * Now requires `craftcms/cms` `^3.2.0` or later
 * Updated docs to use Vitepress `^1.0.0-alpha.29`
 * Added `allow-plugins` to `composer.json` to fix CI
