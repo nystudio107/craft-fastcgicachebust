@@ -12,6 +12,8 @@ namespace nystudio107\fastcgicachebust\services;
 
 use Craft;
 use craft\base\Component;
+use craft\base\Element;
+use craft\elements\Entry;
 use craft\helpers\FileHelper;
 use nystudio107\fastcgicachebust\FastcgiCacheBust;
 use yii\base\ErrorException;
@@ -52,5 +54,25 @@ class Cache extends Component
                 );
             }
         }
+    }
+
+    /**
+     * Determine whether the cache should be busted or not based on the $element
+     *
+     * @param Element $element
+     *
+     * @return bool
+     */
+    public function shouldBustCache(Element $element): bool
+    {
+        $bustCache = true;
+        // Only bust the cache if the element is ENABLED or LIVE
+        if (($element->getStatus() !== Element::STATUS_ENABLED)
+            && ($element->getStatus() !== Entry::STATUS_LIVE)
+        ) {
+            $bustCache = false;
+        }
+
+        return $bustCache;
     }
 }
