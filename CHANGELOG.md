@@ -1,6 +1,6 @@
 # FastCGI Cache Bust Changelog
 
-## 4.0.0 - 2022.12.24
+## 4.0.0 - UNRELEASED
 ### Changed
 * Don't bust the cache if the element being saved is a draft or revision ([#37](https://github.com/nystudio107/craft-fastcgicachebust/issues/37))
 * Updated docs to use Vitepress `^1.0.0-alpha.29`
