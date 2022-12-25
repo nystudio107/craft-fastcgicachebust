@@ -21,7 +21,7 @@ use craft\services\Elements;
 use craft\services\TemplateCaches;
 use craft\utilities\ClearCaches;
 use nystudio107\fastcgicachebust\models\Settings;
-use nystudio107\fastcgicachebust\services\Cache as CacheService;
+use nystudio107\fastcgicachebust\services\ServicesTrait;
 use yii\base\Event;
 use yii\base\Exception;
 use function get_class;
@@ -32,11 +32,14 @@ use function get_class;
  * @author    nystudio107
  * @package   FastcgiCacheBust
  * @since     1.0.0
- *
- * @property  CacheService cache
  */
 class FastcgiCacheBust extends Plugin
 {
+    // Traits
+    // =========================================================================
+
+    use ServicesTrait;
+
     // Static Properties
     // =========================================================================
 
@@ -65,18 +68,6 @@ class FastcgiCacheBust extends Plugin
 
     // Public Methods
     // =========================================================================
-
-    /**
-     * @inheritdoc
-     */
-    public function __construct($id, $parent = null, array $config = [])
-    {
-        $config['components'] = [
-            'cache' => CacheService::class,
-        ];
-
-        parent::__construct($id, $parent, $config);
-    }
 
     /**
      * @inheritdoc
