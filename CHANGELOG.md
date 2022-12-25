@@ -1,9 +1,12 @@
 # FastCGI Cache Bust Changelog
 
+## 4.0.0 - 2022.12.24
+### Changed
+* Updated docs to use Vitepress `^1.0.0-alpha.29`
+* Added `allow-plugins` to `composer.json` to fix CI
+
 ## 4.0.0-beta.1 - 2022.03.12
-
 ### Added
-
 * Initial Craft CMS 4 compatibility
 
 ## 1.0.10 - 2022.03.12
