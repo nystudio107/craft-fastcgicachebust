@@ -14,6 +14,7 @@ use Craft;
 use craft\base\Component;
 use craft\base\Element;
 use craft\elements\Entry;
+use craft\helpers\ElementHelper;
 use craft\helpers\FileHelper;
 use nystudio107\fastcgicachebust\FastcgiCacheBust;
 use nystudio107\fastcgicachebust\models\Settings;
@@ -68,14 +69,15 @@ class Cache extends Component
      */
     public function shouldBustCache(Element $element): bool
     {
-        $bustCache = true;
-        // Only bust the cache if the element is ENABLED or LIVE
-        if (($element->getStatus() !== Element::STATUS_ENABLED)
-            && ($element->getStatus() !== Entry::STATUS_LIVE)
-        ) {
-            $bustCache = false;
+        // Don't bust the cache if the element isn't ENABLED or LIVE
+        if (($element->getStatus() !== Element::STATUS_ENABLED) && ($element->getStatus() !== Entry::STATUS_LIVE)) {
+            return false;
+        }
+        // Don't bust the cache if the element is a draft or revision
+        if (ElementHelper::isDraftOrRevision($element)) {
+            return false;
         }
 
-        return $bustCache;
+        return true;
     }
 }
