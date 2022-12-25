@@ -1,7 +1,12 @@
 # FastCGI Cache Bust Changelog
 
-## 1.0.10 - 2022.03.12
+## 1.0.11 - 2022.12.24
+### Changed
+* Now requires `craftcms/cms` `^3.2.0` or later
+* Updated docs to use Vitepress `^1.0.0-alpha.29`
+* Added `allow-plugins` to `composer.json` to fix CI
 
+## 1.0.10 - 2022.03.12
 ### Added
 * Added the ability to use environment variables and aliases in the **FastCGI Cache Path** setting ([#9](https://github.com/nystudio107/craft-fastcgicachebust/issues/9))
 * Added `.gitattributes` & `CODEOWNERS`
