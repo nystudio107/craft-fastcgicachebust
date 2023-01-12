@@ -13,7 +13,6 @@ namespace nystudio107\fastcgicachebust;
 use Craft;
 use craft\base\Element;
 use craft\base\Plugin;
-use craft\elements\Entry;
 use craft\events\DeleteTemplateCachesEvent;
 use craft\events\ElementEvent;
 use craft\events\RegisterCacheOptionsEvent;
@@ -21,7 +20,7 @@ use craft\services\Elements;
 use craft\services\TemplateCaches;
 use craft\utilities\ClearCaches;
 use nystudio107\fastcgicachebust\models\Settings;
-use nystudio107\fastcgicachebust\services\Cache as CacheService;
+use nystudio107\fastcgicachebust\services\ServicesTrait;
 use yii\base\Event;
 use yii\base\Exception;
 use function get_class;
@@ -32,11 +31,14 @@ use function get_class;
  * @author    nystudio107
  * @package   FastcgiCacheBust
  * @since     1.0.0
- *
- * @property  CacheService cache
  */
 class FastcgiCacheBust extends Plugin
 {
+    // Traits
+    // =========================================================================
+
+    use ServicesTrait;
+
     // Static Properties
     // =========================================================================
 
@@ -69,18 +71,6 @@ class FastcgiCacheBust extends Plugin
     /**
      * @inheritdoc
      */
-    public function __construct($id, $parent = null, array $config = [])
-    {
-        $config['components'] = [
-            'cache' => CacheService::class,
-        ];
-
-        parent::__construct($id, $parent, $config);
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function init()
     {
         parent::init();
@@ -98,7 +88,7 @@ class FastcgiCacheBust extends Plugin
                 /** @var Element $element */
                 $element = $event->element;
                 // Only bust the cache if it's not certain excluded element types
-                if ($this->shouldBustCache($element)) {
+                if (self::$plugin->cache->shouldBustCache($element)) {
                     Craft::debug(
                         'Cache busted due to saving: ' . get_class($element) . ' - ' . $element->title,
                         __METHOD__
@@ -142,26 +132,6 @@ class FastcgiCacheBust extends Plugin
 
     // Protected Methods
     // =========================================================================
-
-    /**
-     * Determine whether the cache should be busted or not based on the $element
-     *
-     * @param Element $element
-     *
-     * @return bool
-     */
-    protected function shouldBustCache(Element $element): bool
-    {
-        $bustCache = true;
-        // Only bust the cache if the element is ENABLED or LIVE
-        if (($element->getStatus() !== Element::STATUS_ENABLED)
-            && ($element->getStatus() !== Entry::STATUS_LIVE)
-        ) {
-            $bustCache = false;
-        }
-
-        return $bustCache;
-    }
 
     /**
      * @inheritdoc
