@@ -1,6 +1,6 @@
 # FastCGI Cache Bust Changelog
 
-## 1.0.11 - UNRELEASED
+## 1.0.11 - 2023.01.12
 ### Changed
 * Don't bust the cache if the element being saved is a draft or revision ([#37](https://github.com/nystudio107/craft-fastcgicachebust/issues/37))
 * Now requires `craftcms/cms` `^3.2.0` or later
